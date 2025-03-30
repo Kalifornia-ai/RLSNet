@@ -230,7 +230,7 @@ model.eval()
 with torch.no_grad():
     y_hats, w_final = model(x_data, s_data)
     # We'll use the final step's output
-    y_hat_final = y_hats[0, -1, :]  # shape: (N,) (since the first dim is batch=1)
+    y_hat_final = y_hats.squeeze(0)   # shape: (N,) (since the first dim is batch=1)
 
 mse = torch.mean((y_hat_final - s_data)**2).item()
 print(f"Test MSE: {mse:.6f}")
